@@ -1,0 +1,1 @@
+Static website template for SCF. View [dworthen/scf](https://github.com/dworthen/scf) for more information.

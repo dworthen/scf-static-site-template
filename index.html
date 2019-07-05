@@ -1,9 +1,10 @@
 ---
+- filename: index.html
 - name: title
-  message: Document title.
+  message: Document title
 - name: name
   default: World
-  message: Who do you want to say hello to?
+  message: Name to say hello to
 ---
 
 <!DOCTYPE html>
@@ -13,9 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>${title ? title : "Basic HTML Template"}</title>
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="${files['css/site.css'].dest}" />
   </head>
   <body>
     <h1>Hello ${name}</h1>
+    <script src="${files['js/app.js'].dest}"></script>
   </body>
 </html>
