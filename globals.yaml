@@ -1,4 +1,0 @@
-- name: scaffoldPackageJson
-  type: confirm
-  default: true
-  message: Scaffold package.json?
