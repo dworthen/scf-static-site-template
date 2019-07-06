@@ -1,5 +1,6 @@
 ---
 - filename: index.html
+- templateEngine: ejs
 - name: title
   message: Document title
 - name: name
@@ -13,11 +14,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>${title ? title : "Basic HTML Template"}</title>
-    <link rel="stylesheet" href="${files['css/site.css'].dest}" />
+    <title><%- title ? title : "Basic HTML Template" %></title>
+    <link rel="stylesheet" href="<%- files['css/site.css'].dest %>" />
   </head>
   <body>
-    <h1>Hello ${name}</h1>
-    <script src="${files['js/app.js'].dest}"></script>
+    <h1>Hello <%- name %></h1>
+    <script src="<%- files['js/app.js'].dest %>"></script>
   </body>
 </html>

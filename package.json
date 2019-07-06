@@ -1,11 +1,12 @@
 ---
 - filename: package.json
+- templateEngine: ejs
 - conditions:
     - name: scaffoldPackageJson
       operator: eq
       value: true
 - name: name
-  message: name
+  message: package name
   pattern: !!js/regexp /^(?=.{1,214}$)(?:@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/
 - name: version
   message: version
@@ -34,17 +35,33 @@
     - none
 ---
 {
-  "name": "${name}",
-  "version": "${version}",
-  "description": "${description}",
-  "main": "${entry}",
+  "name": "<%- name %>",
+  "version": "<%- version %>",
+  "description": "<%- description %>",
+  "main": "<%- entry %>",
   "scripts": { 
-    "test": "${test}"${webserver !== "none" ? ",": ""} 
-    ${webserver === "serve" ? '"start": "serve . -l 5000"' : webserver === "http-server" ? '"start": "http-server . -p 5000"' : webserver === "sirv" ? '"start": "sirv start . -p 5000"' : ""}
+    "test": "<%- test %>"<%- webserver !== "none" ? "," : "" %>
+  <%_ if(webserver === "serve") { _%>     
+    "start": "serve . -l 5000"
+  <%_ } _%>
+  <%_ if(webserver === "http-server") { _%>
+    "start": "http-server . -p 5000"
+  <%_ } _%>
+  <%_ if(webserver === "sirv") { _%>
+    "start": "sirv start . -p 5000"
+  <%_ } _%>
   },
-  "author": "${author}",
-  "license": "${license}",
+  "author": "<%- author %>",
+  "license": "<%- license %>",
   "devDependencies": {
-    ${webserver === "serve" ? '"serve": "^11.0.2"' : webserver === "http-server" ? '"http-server": "^0.11.1"': webserver === "sirv" ? '"sirv-cli": "^0.4.4"': ""}
+  <%_ if(webserver === "serve") { _%>
+    "serve": "^11.0.2"
+  <%_ } _%>
+  <%_ if(webserver === "http-server") { _%>
+    "http-server": "^0.11.1"
+  <%_ } _%>
+  <%_ if(webserver === "sirv") { _%>
+    "sirv-cli": "^0.4.4"
+  <%_ } _%>
   }
 }
